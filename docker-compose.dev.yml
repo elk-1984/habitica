@@ -15,7 +15,7 @@ services:
     volumes:
       - data:/usr/src/habitica
       - node_modules:/usr/src/habitica/node_modules
-      - node_modules:/usr/src/habitica/website/client/node_modules
+      - client_node_modules:/usr/src/habitica/website/client/node_modules
   server:
     build:
       context: .
@@ -48,5 +48,6 @@ networks:
 volumes:
   data:
   node_modules:
+  client_node_modules:
   db:
   config_db:
