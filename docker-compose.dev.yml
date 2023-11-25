@@ -13,9 +13,9 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - .:/usr/src/habitica
-      - /usr/src/habitica/node_modules
-      - /usr/src/habitica/website/client/node_modules
+      - data:/usr/src/habitica
+      - node_modules:/usr/src/habitica/node_modules
+      - node_modules:/usr/src/habitica/website/client/node_modules
   server:
     build:
       context: .
@@ -30,14 +30,23 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/usr/src/habitica
-      - /usr/src/habitica/node_modules
+      - data:/usr/src/habitica
+      - node_modules:/usr/src/habitica/node_modules
   mongo:
     image: mongo:3.6
     networks:
       - habitica
     ports:
       - "27017:27017"
+    volumes:
+      - db:/data/db
+      - config_db:/data/configdb
 networks:
   habitica:
     driver: bridge
+
+volumes:
+  data:
+  node_modules:
+  db:
+  config_db:
